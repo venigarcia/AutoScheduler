@@ -1,0 +1,25 @@
+{
+  "name": "appadm",
+  "main": "main.js",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "start": "electron --disable-gpu .",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/aravel-mix/setup/webpack.config.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "electron": "^7.1.7",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "laravel-mix": "^5.0.1",
+    "webpack": "^4.41.5"
+  }
+}
