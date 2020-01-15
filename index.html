@@ -1,0 +1,36 @@
+<html ng-app='cdg'>
+    <head>
+        <title>AutoScheduler</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <!-- jQuery -->
+	    <script>window.$ = window.jQuery = require('jquery');</script>
+        <!-- Angular -->
+        <script src="node_modules/angular/angular.js"></script>
+        <!-- Angular - Pagination -->
+        <script src="node_modules/angular-utils-pagination/dirPagination.js"></script>
+        <script src="node_modules/angular-route/angular-route.js"></script>
+        <!-- APP -->
+        <script src="app.js"></script>
+        <!-- Controllers -->
+        <script src="controllers/usuarioController.js"></script>
+        <script src="controllers/homeController.js"></script>
+        <!-- Services -->
+        <script src="services/dbService.js"></script>
+        <script src="services/usuarioService.js"></script>
+        <script src="services/homeService.js"></script>
+        <!--Bootstrap Js-->
+        <script src="bootstrap/js/bootstrap.js"></script>
+    </head>
+    <body>
+        <nav>
+            <ol>
+                <a href="#!">AutoScheduler</a>
+            </ol>            
+        </nav>
+        <div ng-view=""></div>   
+             
+    </body>
+</html>
