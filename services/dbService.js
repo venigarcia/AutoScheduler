@@ -2,7 +2,7 @@
 app.factory("dbService", function($http){
     const mysql = require('mysql');
     const conn = mysql.createConnection({
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         port: '3306',
         user: 'root',
         password: 'Info@1234',

@@ -35,14 +35,17 @@
             dbService.query(query, [name], function(err, rows){
                 if(err) deferred.reject(err);
                 deferred.resolve(rows);
-            })
+            });
             return deferred.promise;
         }
         function createUsuarios(usuario){
             var deferred = $q.defer();
             var query = "INSERT INTO usuario SET ?";
             dbService.query(query, usuario, function(err, res){
-                if(err) deferred.reject(err);
+                if(err){
+                    alert("Erro");
+                    deferred.reject(err);
+                }
                 deferred.resolve(res.insertId);
             });
             return deferred.promise;
@@ -58,8 +61,8 @@
         }
         function updateUsuarios(usuario){
             var deferred = $q.defer();
-            var query = "UPDATE usuario SET nome=? WHERE matricula = ?";
-            dbService.query(query, [usuario.nome, usuario.matricula], function(err, res){
+            var query = "UPDATE usuario SET nome=?, email=? WHERE matricula = ?";
+            dbService.query(query, [usuario.nome, usuario.email, usuario.matricula], function(err, res){
                 if(err) deferred.reject(err);
                 deferred.resolve(res);
             });
