@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Bootstrap CSS-->
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- jQuery -->
 	    <script>window.$ = window.jQuery = require('jquery');</script>
         <!-- Angular -->
@@ -29,8 +30,50 @@
     <body>
         <nav>
             <ol>
-                <a href="#!">AutoScheduler</a>
-            </ol>            
+                <a href="#!">
+                    <div class="mainBar">
+                        <span>AutoScheduler</span>
+                    </div>
+                </a>
+            </ol> 
+            <ul class="barraNavegacao">
+                <li>
+                    <a href="#!">
+                        <div class="icon">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </div>
+                        <div class="name"><span data-text="Home">Home</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!usuario">
+                        <div class="icon">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </div>
+                        <div class="name"><span data-text="Usuarios">Usuarios</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!ambiente">
+                        <div class="icon">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                        </div>
+                        <div class="name"><span data-text="Ambientes">Ambientes</span></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <div class="icon">
+                            <i class="fa fa-database" aria-hidden="true"></i>
+                            <i class="fa fa-database" aria-hidden="true"></i>
+                        </div>
+                        <div class="name"><span data-text="Bases">Bases</span></div>
+                    </a>
+                </li>
+            </ul>                       
         </nav>
         <div ng-view=""></div>   
              

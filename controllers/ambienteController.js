@@ -26,6 +26,7 @@
 
         //FUNÇÃO PARA EXIBIÇÃO DE TELA CADASTRO OU EDIÇÃO
         self.showModal = showModal; //mostrar a tela de cadastro ou edição
+        self.showModalBibliotecas = showModalBibliotecas; //mostrar a tela de cadastro ou edição
         //INICIALIZAR COM A PÁGINA
         getAllAmbientes();
         getAllBibliotecas();
@@ -143,6 +144,10 @@
             $scope.addbibliotecas = null;
             $scope.bibliotecas = null;
             $scope.ambiente = {};
+        }
+        function showModalBibliotecas(dados){
+            $scope.ambiente = dados;
+            $('#modalBibliotecas').modal('show');
         }   
     }
 })();

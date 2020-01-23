@@ -1,77 +1,76 @@
-<div>
-	<a href="#!">voltar</a>
-</div>
-<div class="row">
-	<div class="col-md-8">
-		<button class="btn btn-primary" ng-click="_ctrl.novoUsuarioForm()"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</button>
-		<input class="form-search" placeholder="Pesquisar" ng-model="pesquisar">
+<div class="viewContent">
+	<div class="row">
+		<div class="col-md-8">
+			<button class="btn btn-primary" ng-click="_ctrl.novoUsuarioForm()"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</button>
+			<input class="form-search" placeholder="Pesquisar" ng-model="pesquisar">
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<table class="table table-striped">
-			<thead>
-				<th>Nome</th>
-				<th>Matricula</th>
-				<th>Email</th>
-                <th>Senha</th>
-				<th></th>
-			</thead>
-			<tbody>
-                <!-- Listagem -->
-				<tr dir-paginate="pessoa in _ctrl.usuarios|filter:pesquisar|itemsPerPage:8">
-					<td>{{pessoa.nome}}</td>
-					<td>{{pessoa.matricula}}</td>
-                    <td>{{pessoa.email}}</td>
-                    <td>{{pessoa.senha}}</td>
-					<td>
-						<button class="btn btn-info btn-xs" ng-click="_ctrl.updateUsuarioForm(pessoa)"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
-						<button class="btn btn-danger btn-xs" ng-click="_ctrl.deleteUsuario(pessoa.matricula)"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<th>Nome</th>
+					<th>Matricula</th>
+					<th>Email</th>
+					<th>Senha</th>
+					<th></th>
+				</thead>
+				<tbody>
+					<!-- Listagem -->
+					<tr dir-paginate="pessoa in _ctrl.usuarios|filter:pesquisar|itemsPerPage:8">
+						<td>{{pessoa.nome}}</td>
+						<td>{{pessoa.matricula}}</td>
+						<td>{{pessoa.email}}</td>
+						<td>{{pessoa.senha}}</td>
+						<td>
+							<button class="btn btn-info btn-xs" ng-click="_ctrl.updateUsuarioForm(pessoa)"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
+							<button class="btn btn-danger btn-xs" ng-click="_ctrl.deleteUsuario(pessoa.matricula)"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-<!-- Paginação -->
-<div class="row">
-	<div class="col-md-12 text-center">
-		<dir-pagination-controls>
-	    </dir-pagination-controls>
+	<!-- Paginação -->
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<dir-pagination-controls>
+			</dir-pagination-controls>
+		</div>
 	</div>
-</div>
-<div class="modal fade" id="modalPessoa" tabindex="-1" role="dialog" >
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Novo Usuário</h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-6">
-						<label>Nome:</label>
-						<input class="form-control" type="text" ng-model="_ctrl.usuario.nome">
+	<div class="modal fade" id="modalPessoa" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Novo Usuário</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Nome:</label>
+							<input class="form-control" type="text" ng-model="_ctrl.usuario.nome">
+						</div>
+						<div class="col-md-6">
+							<label>Matrícula:</label>
+							<input  id="matricula" class="form-control" type="number" ng-model="_ctrl.usuario.matricula">
+						</div>
 					</div>
-					<div class="col-md-6">
-						<label>Matrícula:</label>
-						<input  id="matricula" class="form-control" type="text" ng-model="_ctrl.usuario.matricula">
+					<div class="row">
+						<div class="col-md-6">
+							<label>E-mail:</label>
+							<input class="form-control" type="email" ng-model="_ctrl.usuario.email">
+						</div>
+						<div class="col-md-6">
+							<label id="labelsenha">Senha:</label>
+							<input  id="inputsenha" class="form-control" type="password" ng-model="_ctrl.usuario.senha">
+						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<label>E-mail:</label>
-						<input class="form-control" type="text" ng-model="_ctrl.usuario.email">
-					</div>
-					<div class="col-md-6">
-						<label id="labelsenha">Senha:</label>
-						<input  id="inputsenha" class="form-control" type="password" ng-model="_ctrl.usuario.senha">
-					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="_ctrl.usuario = {}">Cancelar</button>
+					<button type="button" class="btn btn-primary" ng-click="_ctrl.saveUsuario()" data-dismiss="modal">Salvar</button>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="_ctrl.usuario = {}">Cancelar</button>
-				<button type="button" class="btn btn-primary" ng-click="_ctrl.saveUsuario()" data-dismiss="modal">Salvar</button>
 			</div>
 		</div>
 	</div>

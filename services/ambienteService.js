@@ -45,7 +45,7 @@
         }
         function getBibliotecas(id){
             var deferred = $q.defer();
-            var query = "SELECT biblioteca.nome, biblioteca.versao FROM ambiente, ambiente_biblioteca, biblioteca WHERE ambiente.cod = ambiente_biblioteca.cod_ambiente and biblioteca.cod = ambiente_biblioteca.cod_biblioteca and ambiente.cod = ?";
+            var query = "SELECT * FROM ambiente, ambiente_biblioteca, biblioteca WHERE ambiente.cod = ambiente_biblioteca.cod_ambiente and biblioteca.cod = ambiente_biblioteca.cod_biblioteca and ambiente.cod = ?";
             dbService.query(query, [id], function(err, rows){
                 if(err) deferred.reject(err);
                 deferred.resolve(rows);
