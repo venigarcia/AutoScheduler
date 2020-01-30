@@ -12,6 +12,17 @@ html {
 body {
   margin: 0;
 }
+md-progress-linear{
+  background-color: green;
+}
+.progress-striped{
+  background-color: green;
+  text-align: right;
+  position: relative;
+  margin:0;
+  padding: 10px 0;
+  width:100%;
+}
 .mainBar{
   position: absolute;
   margin:-10 0 0 -40;

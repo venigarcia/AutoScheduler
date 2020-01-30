@@ -1,0 +1,70 @@
+<div class="viewContent">
+    <div class="row">
+		<div class="col-md-8">
+            <!--BOTÃO PARA MOSTRAR O POP-UP DE CADASTRO DE BASE E BARRA DE PESQUISA-->
+			<button class="btn btn-primary" data-toggle="modal" data-target="#modalBase" ng-click="eventCriarBase(flag=true)"><span class="glyphicon glyphicon-plus"></span> Nova Base</button>
+            <input class="form-search" placeholder="Pesquisar" ng-model="pesquisar">
+		</div>
+    </div>
+    <!--BARRA DE PROGRESSO DO PROCESSO DE ENVIO FTP-->
+    <!--TABELA COM LISTAGEM DE BASES-->
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<th>Codigo</th>
+					<th>Nome</th>
+                    <th>Path</th>
+                    <th></th>
+				</thead>
+				<tbody>
+					<!-- Listagem -->
+					<tr dir-paginate="base in bases|filter:pesquisar|itemsPerPage:8">
+						<td>{{base.cod}}</td>
+                        <td>{{base.nome}}</td>
+                        <td>{{base.path}}</td>
+						<td>
+							<button class="btn btn-info btn-xs" ng-click="_ctrlBase.getConteudo(base.cod)"><span class="glyphicon glyphicon-th-list"></span>Visualizar</button></br>
+							<button class="btn btn-info btn-xs" ng-click="_ctrlBase.showModal(base); eventCriarBase(flag=false)"><span class="glyphicon glyphicon-pencil"></span>Editar</button>
+							<button class="btn btn-danger btn-xs" ng-click="_ctrlBase.deleteBase(base.cod)"><span class="glyphicon glyphicon-trash"></span>Excluir</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--Paginação-->
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<dir-pagination-controls>
+			</dir-pagination-controls>
+		</div>
+    </div>
+    <!--POP-UP DE CADASTRO DE BASE-->
+    <div class="modal fade" id="modalBase" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Nova Base</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Nome:</label>
+							<input class="form-control" type="text" ng-model="base.nome">
+						</div>
+						<div class="col-md-6">
+							<label>Conteúdo:</label>
+							<input class="form-control" type="file" accept=".zip,.tar, .rar" select-ng-files ng-model="fileArray">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" ng-click="limpaListaBiblioteca()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary" ng-click="saveBase(base)" data-dismiss="modal">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

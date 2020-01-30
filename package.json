@@ -22,11 +22,18 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "angular": "^1.7.9",
+    "angular": "^1.6.9",
+    "angular-animate": "^1.7.9",
+    "angular-aria": "^1.7.9",
+    "angular-material": "^1.1.21",
+    "angular-progress-bar": "^1.0.9",
     "angular-route": "^1.7.9",
     "angular-utils-pagination": "^0.11.1",
+    "basic-ftp": "^4.5.3",
     "electron-packager": "^14.2.0",
     "electron-prebuilt": "^1.4.13",
+    "ftp": "^0.3.10",
+    "ftp-client": "^0.2.2",
     "laravel-mix": "^5.0.1",
     "webpack": "^4.41.5"
   }

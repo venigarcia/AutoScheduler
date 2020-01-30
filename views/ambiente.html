@@ -2,40 +2,39 @@
 	<div class="row">
 		<div class="col-md-8">
 			<button class="btn btn-primary" data-toggle="modal" data-target="#modalAmbiente" ng-click="eventCriarAmbiente(flag=true)"><span class="glyphicon glyphicon-plus"></span> Novo Ambiente</button>
-			<button class="btn btn-primary" data-toggle="modal" data-target="#modalNovaBiblioteca"><span class="glyphicon glyphicon-plus"></span> Nova Biblioteca</button>
 			<input class="form-search" placeholder="Pesquisar" ng-model="pesquisar">
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table table-striped">
-				<thead>
-					<th>Codigo</th>
-					<th>Nome</th>
-					<th>Descrição</th>
-					<th></th>
-				</thead>
-				<tbody>
-					<!-- Listagem -->
-					<tr dir-paginate="ambiente in ambientes|filter:pesquisar|itemsPerPage:8">
-						<td>{{ambiente.cod}}</td>
-						<td>{{ambiente.nome}}</td>
-						<td>{{ambiente.descricao}}</td>
-						<td>
-							<button class="btn btn-info btn-xs" ng-click="_ctrlAmb.getBibliotecas(ambiente.cod); _ctrlAmb.showModalBibliotecas(ambiente)"><span class="glyphicon glyphicon-th-list"></span> Listar</button></br>
-							<button class="btn btn-info btn-xs" ng-click="_ctrlAmb.showModal(ambiente); eventCriarAmbiente(flag=false)"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
-							<button class="btn btn-danger btn-xs" ng-click="_ctrlAmb.deleteAmbiente(ambiente.cod)"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	<div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-striped">
+					<thead>
+						<th>Codigo</th>
+						<th>Nome</th>
+						<th>Opções</th>
+					</thead>
+					<tbody>
+						<!-- Listagem -->
+						<tr dir-paginate="ambiente in ambientes|filter:pesquisar|itemsPerPage:8" pagination-id="ambiente">
+							<td>{{ambiente.cod}}</td>
+							<td>{{ambiente.nome}}</td>
+							<td>
+								<button class="btn btn-info btn-xs" ng-click="_ctrlAmb.getBibliotecas(ambiente.cod); _ctrlAmb.showModalBibliotecas(ambiente)"><span class="glyphicon glyphicon-th-list"></span> Listar</button>
+								<button class="btn btn-info btn-xs" ng-click="_ctrlAmb.showModal(ambiente); eventCriarAmbiente(flag=false)"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
+								<button class="btn btn-danger btn-xs" ng-click="_ctrlAmb.deleteAmbiente(ambiente.cod)"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
-	<!--Paginação-->
-	<div class="row">
-		<div class="col-md-12 text-center">
-			<dir-pagination-controls>
-			</dir-pagination-controls>
+		<!--Paginação-->
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<dir-pagination-controls pagination-id="ambiente">
+				</dir-pagination-controls>
+			</div>
 		</div>
 	</div>
 	<div class="modal fade" id="modalAmbiente" tabindex="-1" role="dialog" >
@@ -56,75 +55,10 @@
 							<input class="form-control" type="text" ng-model="ambiente.descricao">
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<label>Bibliotecas:</label>                        
-						</div>
-						<div class="col-md-6">
-							<div class="row">
-								<div class="col-md-12">
-									<table class="table table-striped">
-										<thead>
-											<th>Nome</th>
-											<th>Versão</th>
-											<th>
-												<div>
-													<td id="listabiblioteca"><select id="listadebibliotecas"></select><button type="button" class="btn btn-default" ng-click="_ctrlAmb.adicionarBiblioteca()">Adicionar</button></td>
-												</div>	
-											</th>
-										</thead>
-										<tbody>
-											<!-- Listagem -->										
-											<tr dir-paginate="addbiblioteca in addbibliotecas|itemsPerPage:4">
-												<td>{{addbiblioteca[0].nome}}</td>
-												<td>{{addbiblioteca[0].versao}}</td>
-												<td><button type="button" ng-click="deleteMe($index)">x</button></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!--Paginação-->
-							<div class="row">
-								<div class="col-md-12 text-center">
-									<dir-pagination-controls>
-									</dir-pagination-controls>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" ng-click="limpaListaBiblioteca()" data-dismiss="modal">Cancelar</button>
 					<button type="button" class="btn btn-primary" ng-click="saveAmbiente(ambiente)" data-dismiss="modal">Salvar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="modalNovaBiblioteca" tabindex="-1" role="dialog" >
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Nova Biblioteca</h4>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="row">
-							<div class="col-md-6">
-								<label>Nome:</label>
-								<input class="form-control" type="text" ng-model="biblioteca.nome" placeholder="Nome da biblioteca" required>
-							</div>
-							<div class="col-md-6">
-								<label>Versão:</label>
-								<input class="form-control" type="text" ng-model="biblioteca.versao" placeholder="ex: 2.1.1" required>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" ng-click="_ctrlAmb.biblioteca = {}" data-dismiss="modal">Cancelar</button>
-							<input type="submit" class="btn btn-primary" ng-click="_ctrlAmb.createBiblioteca()" data-dismiss="modal">
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -134,7 +68,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="limpaListaBiblioteca()"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Lista de Biblitoecas do ambiente {{ambiente.nome}}</h4>
+					<h4 class="modal-title" id="myModalLabel">Lista de Bibliotecas do ambiente {{ambiente.nome}}</h4>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -146,14 +80,12 @@
 						<div class="col-md-12">
 							<table class="table table-striped">
 								<thead>
-									<th>Codigo</th>
 									<th>Nome</th>
 									<th>Versão</th>
 								</thead>
 								<tbody>
 									<!-- Listagem -->
-									<tr dir-paginate="biblioteca in bibliotecas|filter:pesquisarBibliotecas|itemsPerPage:8">
-										<td>{{biblioteca.cod}}</td>
+									<tr dir-paginate="biblioteca in bibliotecas|filter:pesquisarBibliotecas|itemsPerPage:8" pagination-id="biblioteca">
 										<td>{{biblioteca.nome}}</td>
 										<td>{{biblioteca.versao}}</td>
 									</tr>
@@ -163,7 +95,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<dir-pagination-controls>
+							<dir-pagination-controls pagination-id="biblioteca">
 							</dir-pagination-controls>
 						</div>
 					</div>

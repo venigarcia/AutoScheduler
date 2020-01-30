@@ -1,5 +1,5 @@
 "USE STRICT";
-app.factory("dbService", function($http){
+app.factory("dbService", function(){
     const mysql = require('mysql');
     const conn = mysql.createConnection({
         host: '0.0.0.0',

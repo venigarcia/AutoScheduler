@@ -1,5 +1,4 @@
-var app = angular.module('cdg', ['ngRoute', 'angularUtils.directives.dirPagination']);
-
+var app = angular.module('cdg', ['ngRoute', 'angularUtils.directives.dirPagination', 'ngMaterial', 'ngAnimate']);
 app.config(function($routeProvider){
 	$routeProvider
 	.when('/usuario', {
@@ -19,7 +18,13 @@ app.config(function($routeProvider){
 		controller: "ambienteController",
 		controllerAs: "_ctrlAmb",
 		access: {requiredLogin: false}
-	});
+  })
+  .when('/base', {
+    templateUrl: "views/base.html",
+		controller: "baseController",
+		controllerAs: "_ctrlBase",
+		access: {requiredLogin: false}
+  });
 });
 
 app.directive('compile', ['$compile', function ($compile) {
@@ -44,4 +49,14 @@ app.directive('compile', ['$compile', function ($compile) {
   };
 }]);
 
-
+angular.module("cdg").directive("selectNgFiles", function() {
+  return {
+    require: "ngModel",
+    link: function postLink(scope,elem,attrs,ngModel) {
+      elem.on("change", function(e) {
+        var files = elem[0].files;
+        ngModel.$setViewValue(files);
+      })
+    }
+  }
+});

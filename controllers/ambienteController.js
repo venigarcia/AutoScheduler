@@ -20,34 +20,35 @@
         self.createBiblioteca = createBiblioteca; //função para adicionar um biblioteca ao banco  
         
         self.getBibliotecas = getBibliotecas; //uma função para listar todas as bibliotecas possuidas por um ambiente específico 
-        self.getAllBibliotecas = getAllBibliotecas; //uma função que retorna todas as bibliotecas inseridas no banco
-        self.addSelect = addSelect; //adiciona as options da tag select na view ambiente
-        self.adicionarBiblioteca = adicionarBiblioteca; //função para adicionar o registro de um biblioteca na variável global colletion
 
         //FUNÇÃO PARA EXIBIÇÃO DE TELA CADASTRO OU EDIÇÃO
         self.showModal = showModal; //mostrar a tela de cadastro ou edição
         self.showModalBibliotecas = showModalBibliotecas; //mostrar a tela de cadastro ou edição
         //INICIALIZAR COM A PÁGINA
         getAllAmbientes();
-        getAllBibliotecas();
         
         function getAllAmbientes(){
             ambienteService.getAmbientes().then(function(ambientes){
                $scope.ambientes = ambientes;
             });
         }
-        function getAllBibliotecas(){
-            ambienteService.getAllBibliotecas().then(function(bibliotecas){
-               self.lista = [].concat(bibliotecas);
-               console.log(self.lista);
-               addSelect();
-            });            
-        }
         function getBibliotecas(id){
             ambienteService.getBibliotecas(id).then(function(biblioteca){
                 var _temp = [];
-                _temp = [].concat(biblioteca);
-                $scope.bibliotecas = _temp;
+                var biblioteca_ = [];
+                _temp = biblioteca[0].descricao.split(' ');
+                console.log(_temp);
+                for(var i=0; i<_temp.length;i++){
+                    var dict = {};
+                    var nome = _temp[i].split('==')[0];
+                    var versao = _temp[i].split('==')[1];
+                    dict = {
+                        nome: nome,
+                        versao: versao
+                    }
+                    biblioteca_ = biblioteca_.concat(dict);             
+                }
+                $scope.bibliotecas = biblioteca_;
             });
         }
         function createAmbiente(ambiente){
@@ -85,8 +86,7 @@
                 createAmbiente(ambiente);
             }else{
                 updateAmbiente(ambiente);
-            }
-            
+            }            
         }
         function deleteAmbiente(id){
             ambienteService.destroy(id).then(function(res){
@@ -104,31 +104,6 @@
             });
             getAllBibliotecas();
         }        
-        function addSelect(){
-            $("#listadebibliotecas option").each(function(){
-                $(this).remove();
-            });
-            for(var i=0; i<self.lista.length;i++){
-                console.log(self.lista[i].nome);
-                var z = document.createElement("option");
-                z.setAttribute("value", self.lista[i].cod);
-                var t = document.createTextNode(self.lista[i].nome+"  "+self.lista[i].versao);
-                z.appendChild(t);
-                document.getElementById("listadebibliotecas").appendChild(z);
-            }            
-        }
-        function adicionarBiblioteca(){
-            var element = document.getElementById("listadebibliotecas");
-            var selectedValue = element.options[element.selectedIndex].value;
-            ambienteService.getBibliotecasById(selectedValue).then(function(rows){
-                _colletion.push(rows);
-                console.log(_colletion);
-            });
-            $scope.addbibliotecas = _colletion;
-        }
-        $scope.deleteMe = function(i){
-            $scope.addbibliotecas.splice(i,1);
-        }
         $scope.eventCriarAmbiente = function(flag){
             if(util.isNull(self.ifCadastroAmbiente)&& flag===true){
                 self.ifCadastroAmbiente = flag;
@@ -140,10 +115,8 @@
             console.log(self.ifCadastroAmbiente);            
         }
         $scope.limpaListaBiblioteca = function(){
-            _colletion = [];
-            $scope.addbibliotecas = null;
             $scope.bibliotecas = null;
-            $scope.ambiente = {};
+            //$scope.ambiente = {};
         }
         function showModalBibliotecas(dados){
             $scope.ambiente = dados;
