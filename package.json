@@ -16,7 +16,7 @@
     "electron": "^7.1.10",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "jquery": "^2.1.1",
+    "jquery": "^3.5.0",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "pug": "2.0.0-beta11"
